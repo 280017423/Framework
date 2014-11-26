@@ -57,7 +57,9 @@ public abstract class BottomTab extends LinearLayout {
 			for (int i = 0; i < mBottomItems.size(); i++) {
 				BottomItem bottomItem = mBottomItems.get(i);
 				View bottomView = View.inflate(mContext, R.layout.bottom_item_view, null);
-				bottomView.setLayoutParams(new LayoutParams(0, android.view.ViewGroup.LayoutParams.FILL_PARENT, 1));
+				bottomView.setLayoutParams(new LayoutParams(
+						android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+						android.view.ViewGroup.LayoutParams.MATCH_PARENT, 1));
 				ImageView iconView = (ImageView) bottomView.findViewById(R.id.view_bottom_icon);
 				TextView tvTabName = (TextView) bottomView.findViewById(R.id.tv_bottom_tap_name);
 				tvTabName.setTextColor(mContext.getResources().getColorStateList(getSelectedTextColorRes()));

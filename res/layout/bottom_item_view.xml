@@ -16,6 +16,7 @@
             android:id="@+id/view_bottom_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:contentDescription="@null"
             android:duplicateParentState="true"
             android:scaleType="fitCenter"
@@ -25,6 +26,7 @@
             android:id="@+id/tv_bottom_tap_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:duplicateParentState="true" />
     </LinearLayout>
 
