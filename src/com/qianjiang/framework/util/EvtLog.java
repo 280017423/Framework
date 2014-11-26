@@ -13,11 +13,7 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
-
-import com.qianjiang.framework.app.QJApplicationBase;
 
 /**
  * 
@@ -28,13 +24,7 @@ public class EvtLog {
 	public static boolean IS_DEBUG_LOGGABLE = true;
 	public static boolean IS_ERROR_LOGGABLE = true;
 	static {
-		SharedPreferences sharedPreferences = QJApplicationBase.getInstance()
-				.getSharedPreferences("com.qianjiang.system.config",
-						Context.MODE_WORLD_READABLE);
-		boolean sharedPreferencesDebugLog = sharedPreferences.getBoolean(
-				"system_config_debug_log_enable", false);
-		boolean xmlDebugLog = PackageUtil.getConfigBoolean("debug_log_enable");
-		IS_DEBUG_LOGGABLE = sharedPreferencesDebugLog || xmlDebugLog;
+		IS_DEBUG_LOGGABLE = PackageUtil.getConfigBoolean("debug_log_enable");
 		IS_ERROR_LOGGABLE = PackageUtil.getConfigBoolean("error_log_enable");
 	}
 
@@ -155,18 +145,12 @@ public class EvtLog {
 		if (exception == null) {
 			return false;
 		}
-		if (exception instanceof BindException
-				|| exception instanceof ConnectException
-				|| exception instanceof HttpRetryException
-				|| exception instanceof MalformedURLException
-				|| exception instanceof NoRouteToHostException
-				|| exception instanceof PortUnreachableException
-				|| exception instanceof ProtocolException
-				|| exception instanceof SocketException
-				|| exception instanceof SocketTimeoutException
-				|| exception instanceof UnknownHostException
-				|| exception instanceof UnknownServiceException
-				|| exception instanceof URISyntaxException) {
+		if (exception instanceof BindException || exception instanceof ConnectException
+				|| exception instanceof HttpRetryException || exception instanceof MalformedURLException
+				|| exception instanceof NoRouteToHostException || exception instanceof PortUnreachableException
+				|| exception instanceof ProtocolException || exception instanceof SocketException
+				|| exception instanceof SocketTimeoutException || exception instanceof UnknownHostException
+				|| exception instanceof UnknownServiceException || exception instanceof URISyntaxException) {
 			return true;
 		}
 		return false;
