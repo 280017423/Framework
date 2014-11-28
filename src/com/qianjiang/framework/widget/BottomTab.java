@@ -3,7 +3,6 @@ package com.qianjiang.framework.widget;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,7 +61,7 @@ public abstract class BottomTab extends LinearLayout {
 						android.view.ViewGroup.LayoutParams.MATCH_PARENT, 1));
 				ImageView iconView = (ImageView) bottomView.findViewById(R.id.view_bottom_icon);
 				TextView tvTabName = (TextView) bottomView.findViewById(R.id.tv_bottom_tap_name);
-				tvTabName.setTextColor(mContext.getResources().getColorStateList(getSelectedTextColorRes()));
+				tvTabName.setTextColor(mContext.getResources().getColorStateList(getNormalTextColorRes()));
 				tvTabName.setText(bottomItem.getBottomTabName());
 				iconView.setImageResource(bottomItem.getBottomIconRes());
 				bottomView.setTag(i);
@@ -86,13 +85,17 @@ public abstract class BottomTab extends LinearLayout {
 		// 二级保险，当selectedIndex < 0 时，不还原
 		if (mSelectedIndex >= 0) {
 			View lastSelectedView = getChildAt(mSelectedIndex);
-			lastSelectedView.setBackgroundColor(getResources().getColor(getBackGroupRes()));
+			lastSelectedView.setBackgroundResource(getBackGroupRes());
 			lastSelectedView.setEnabled(true);
+			TextView tvTabName = (TextView) lastSelectedView.findViewById(R.id.tv_bottom_tap_name);
+			tvTabName.setTextColor(mContext.getResources().getColorStateList(getNormalTextColorRes()));
 		}
 		// 将选中置为选中
 		View selectedView = getChildAt(index);
-		selectedView.setBackgroundColor(getResources().getColor(getSelectedViewRes()));
+		selectedView.setBackgroundResource(getSelectedViewRes());
 		selectedView.setEnabled(false);
+		TextView tvTabName = (TextView) selectedView.findViewById(R.id.tv_bottom_tap_name);
+		tvTabName.setTextColor(mContext.getResources().getColorStateList(getSelectedTextColorRes()));
 		// 将之前选中设置为还原
 		mSelectedIndex = index;
 		if (mBottomCheckedListener != null) {
@@ -141,7 +144,7 @@ public abstract class BottomTab extends LinearLayout {
 	 */
 	protected abstract int getSelectedViewRes();
 
-	protected int getSelectedTextColorRes() {
-		return Color.BLACK;
-	}
+	protected abstract int getSelectedTextColorRes();
+
+	protected abstract int getNormalTextColorRes();
 }
