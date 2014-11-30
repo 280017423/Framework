@@ -194,22 +194,20 @@ public abstract class QJActivityBase extends ActivityGroup {
 	 *            弹出的信息内容
 	 */
 	public void toast(final String msg) {
-		if (PackageUtil.isTopApplication(this)) {
-			this.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					if (!StringUtil.isNullOrEmpty(msg) && !DEFAULT_ERROR_MSG.equals(msg)) {
-						Toast toast = Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT);
-						TextView tv = (TextView) toast.getView().findViewById(android.R.id.message);
-						// 用来防止某些系统自定义了消息框
-						if (tv != null) {
-							tv.setGravity(Gravity.CENTER);
-						}
-						toast.show();
+		this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (!StringUtil.isNullOrEmpty(msg) && !DEFAULT_ERROR_MSG.equals(msg)) {
+					Toast toast = Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT);
+					TextView tv = (TextView) toast.getView().findViewById(android.R.id.message);
+					// 用来防止某些系统自定义了消息框
+					if (tv != null) {
+						tv.setGravity(Gravity.CENTER);
 					}
+					toast.show();
 				}
-			});
-		}
+			}
+		});
 	}
 
 	/**
