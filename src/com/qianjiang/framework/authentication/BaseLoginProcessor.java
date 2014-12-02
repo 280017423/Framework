@@ -43,6 +43,7 @@ public abstract class BaseLoginProcessor<T extends BaseActionResult> implements 
 	 * @version 2013-12-12 上午11:35:43 tan.xx
 	 */
 	public enum LOGIN_TYPE {
+		From_ActivityGroup_Tab, // 从ActivityGroup_Tab验证登录
 		From_UserInfo_Type, // 从个人中心进入登录
 		From_UserInfo_Type_And_Cancel_Finish_Type, // 从个人中心进入登录
 		From_Jump_Activity_Type, // 跳转界面进入登录
