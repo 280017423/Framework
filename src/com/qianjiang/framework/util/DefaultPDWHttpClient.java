@@ -60,7 +60,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -554,7 +557,7 @@ public class DefaultPDWHttpClient implements IPDWHttpClient {
 			hrc.connect();
 			if (!isGet) {
 				DataOutputStream os = new DataOutputStream(hrc.getOutputStream());
-				String content = buildContent(params);
+				String content = buildPostContent(params);
 				EvtLog.d(TAG, "post 参数:" + content);
 				byte[] sendData = content.getBytes();
 				if (sendData != null && sendData.length > 0) {
@@ -700,7 +703,8 @@ public class DefaultPDWHttpClient implements IPDWHttpClient {
 	 * 
 	 * @param url
 	 *            请求地址
-	 * @param params 请求参数
+	 * @param params
+	 *            请求参数
 	 * @param isForBackString
 	 *            接口是否是直接返回String
 	 * @return JsonResult
@@ -980,6 +984,33 @@ public class DefaultPDWHttpClient implements IPDWHttpClient {
 		} else {
 			content = tempParamters;
 		}
+		return content;
+	}
+
+	/**
+	 * buildContent 拼接post 参数内容
+	 * 
+	 * @param getParams
+	 *            参数
+	 * @return String 拼接后的参数
+	 */
+	private static String buildPostContent(List<NameValuePair> getParams) {
+		String content = "";
+		JSONObject jsObj = new JSONObject();
+
+		for (int i = 0; i < getParams.size(); i++) {
+			NameValuePair nameValuePair = getParams.get(i);
+			if (nameValuePair != null) {
+				String key = StringUtil.isNullOrEmpty(nameValuePair.getName()) ? "" : nameValuePair.getName();
+				String value = StringUtil.isNullOrEmpty(nameValuePair.getValue()) ? "" : nameValuePair.getValue();
+				try {
+					jsObj.put(key, value);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		content = jsObj.toString();
 		return content;
 	}
 

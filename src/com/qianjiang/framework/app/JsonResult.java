@@ -34,7 +34,6 @@ public class JsonResult {
 	private static final String KEY_DATA = "data";
 	private static final String KEY_CODE = "code";
 	private static final String KEY_MSG = "msg";
-	private static final String KEY_SERVER_TIME = "ServerTime";
 	private static final String BLANK_STRING = "";
 	private static final String BRACKET_STRING = "{}";
 	private static final String STATUS_SUCCESS = "1000";
@@ -42,7 +41,6 @@ public class JsonResult {
 	public String Data;
 	public String Code;
 	public String Msg;
-	public String ServerTime;
 	public String JsonString;
 	private JSONObject mJsonObject;
 
@@ -60,18 +58,6 @@ public class JsonResult {
 		Code = mJsonObject.getString(KEY_CODE);
 		Data = mJsonObject.getString(KEY_DATA);
 		Msg = mJsonObject.getString(KEY_MSG);
-		ServerTime = mJsonObject.getString(KEY_SERVER_TIME);
-	}
-
-	/**
-	 * 
-	 * @Name getServerTime
-	 * @Description 获取服务器时间
-	 * @return String 服务器时间
-	 * 
-	 */
-	public String getServerTime() {
-		return ServerTime;
 	}
 
 	/**
