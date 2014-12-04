@@ -56,7 +56,9 @@ public class JsonResult {
 		mJsonObject = new JSONObject(jsonString);
 		JsonString = jsonString;
 		Code = mJsonObject.getString(KEY_CODE);
-		Data = mJsonObject.getString(KEY_DATA);
+		if (mJsonObject.has(KEY_DATA)) {
+			Data = mJsonObject.getString(KEY_DATA);
+		}
 		Msg = mJsonObject.getString(KEY_MSG);
 	}
 
