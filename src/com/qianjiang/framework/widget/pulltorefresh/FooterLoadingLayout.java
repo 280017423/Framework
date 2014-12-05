@@ -107,8 +107,9 @@ public class FooterLoadingLayout extends FrameLayout {
 		if (!mIsShowFooter) {
 			this.setVisibility(View.INVISIBLE);
 		}
-		attrs.recycle();
-		attrs = null;
+		//修复5.0崩溃的问题
+		// attrs.recycle();
+		// attrs = null;
 		mNoMoreDataLabel = PackageUtil.getString(R.string.no_more_data);
 		mRefreshingLabel = PackageUtil.getString(R.string.pull_to_refresh_from_bottom_refreshing_label);
 		mReleaseLabel = PackageUtil.getString(R.string.pull_to_refresh_from_bottom_release_label);
@@ -142,7 +143,6 @@ public class FooterLoadingLayout extends FrameLayout {
 	public void reset(boolean hasMoreData) {
 		HasMoreData = hasMoreData;
 
-		
 		if (HasMoreData) {
 			mRefreshingLabel = PackageUtil.getString(R.string.pull_to_refresh_from_bottom_refreshing_label);
 			mReleaseLabel = PackageUtil.getString(R.string.pull_to_refresh_from_bottom_release_label);
@@ -262,7 +262,5 @@ public class FooterLoadingLayout extends FrameLayout {
 	public boolean isShowFooter() {
 		return mIsShowFooter;
 	}
-	
-	
-	
+
 }

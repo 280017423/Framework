@@ -174,8 +174,9 @@ public class HeaderLoadingLayout extends FrameLayout {
 		}
 		mIsShowHeader = attrs.getBoolean(R.styleable.PullToRefresh_isShowHeader, true);
 		setHeaderVisible();
-		attrs.recycle();
-		attrs = null;
+		// 修复5.0崩溃的问题
+		// attrs.recycle();
+		// attrs = null;
 		// Set Drawable, and save width/height
 		setLoadingDrawable(imageDrawable);
 	}
