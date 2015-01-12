@@ -53,6 +53,9 @@ public class JsonResult {
 	 *             json异常
 	 */
 	public JsonResult(String jsonString) throws JSONException {
+		if (jsonString != null && jsonString.startsWith("\ufeff")) {
+			jsonString = jsonString.substring(1);
+		}
 		mJsonObject = new JSONObject(jsonString);
 		JsonString = jsonString;
 		Code = mJsonObject.getString(KEY_CODE);
